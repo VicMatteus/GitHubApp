@@ -1,5 +1,6 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import React  from 'react';
+import { useState, useEffect } from 'react';
+import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -9,19 +10,27 @@ import Bio from "./components/Bio";
 import Orgs from "./components/Orgs";
 import Seguidores from "./components/Seguidores";
 import Repositorio from "./components/Repositorio";
-
+import UserContext from './context/UserContext/UserContext';
 
 const Stack = createStackNavigator();
 //https://api.github.com/users/ronaldaraujo
 
 const HomeScreen = () => {
-  
-    return (
+  const [inputState, toogleInput] = useState(false);
+  const alternarInput = () => toogleInput(!inputState)
+
+  return (
     <SafeAreaView  style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'padding'}
+          style={styles.container}>
+        <TextInput style={styles.textInput} placeholder='Digite o usuário'></TextInput>
+        </KeyboardAvoidingView>
+
         <View style={styles.squareContainer}>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={require('./assets/favicon.png')} />
-                <TouchableOpacity style={styles.searchButton} onPress={()=>{} }>
+                <TouchableOpacity style={styles.searchButton} onPress={()=>{alternarInput()} }>
                     <Icon name="magnifying-glass" color='white' size={25}/>
                 </TouchableOpacity>
             </View>
@@ -62,16 +71,31 @@ const HomeScreen = () => {
 };
 
 const App = () => {
+  const urlBase = "https://api.github.com/users"
+  const [usuarioAtual, setUsuarioAtual] = useState()
+  const [idBusca, setIdBusca] = useState("/ronaldaraujo")
+
+  useEffect(() => {
+    fetch(urlBase+idBusca)
+    .then(response => response.json())
+    .then(data=>{setUsuarioAtual(data)})
+    .catch(error => {
+      console.log("Erro na consulta.")
+    });
+  },[]);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Tela de Pesquisa" component={HomeScreen} />
-        <Stack.Screen name="Bio"  component={Bio} />
-        <Stack.Screen name="Orgs" component={Orgs} />
-        <Stack.Screen name="Repositorio" component={Repositorio} />
-        <Stack.Screen name="Seguidores"  component={Seguidores} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserContext.Provider value={[usuarioAtual, setUsuarioAtual]}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Tela de Pesquisa" component={HomeScreen} />
+          <Stack.Screen name="Bio"  component={Bio} />
+          <Stack.Screen name="Orgs" component={Orgs} />
+          <Stack.Screen name="Repositorio" component={Repositorio} />
+          <Stack.Screen name="Seguidores"  component={Seguidores} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserContext.Provider>
   );
 };
 
@@ -88,12 +112,23 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
+  textInput: {
+    flex:0.3,
+    left: 0,
+    right: 0,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius:10,
+    padding: 10,
+    textAlign: "center",
+    fontSize: 16,
+  },
   imageContainer: {
     width: '40%',
     height: '50%',
     borderRadius: 50,
     // borderWidth: 2,
-    // borderColor: 'black',   // Adicionar borda preta
+    // borderColor: 'black',  // Adicionar borda preta
     justifyContent: 'center', // Centralizar verticalmente
     alignItems: 'center',     // Centralizar horizontalmente
   },

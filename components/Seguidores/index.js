@@ -15,33 +15,33 @@ export default function Seguidores() {
         .then((data) => {
             setListFollowers(data)
             if (data.length > 0){
-                listaUsers = listFollowers.map((follower,key)=>{
-                    <ItemFollower key={key} nome={follower.login} urlFollower={follower.url} avatarFollower={follower.avatar_url}/>
-                })
-                console.log(listaUsers)
-                setListFollowers(listaUsers)
+                setListFollowers(data)
             }
         })
     }, [])
     return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
-            {/* {listFollowers} */}
             {
-                //verificar se data tá vazio e mostrar lista de seguidores caso tenha. Caso não, só digo que não tem.
-                // console.log(listFollowers)
-                // listaUsers
+                listFollowers.map((follower, index)=>{
+                    return <ItemFollower key={index} 
+                        nome={follower.login} 
+                        urlFollower={follower.url} 
+                        avatarFollower={follower.avatar_url}/>
+                })
             }
         </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-
+    flex: 1,
+    alignItems:'center',
+    backgroundColor: '#f6f9fd',
   },
   scrollView: {
-  
+    flex: 1,
   },
 })
 

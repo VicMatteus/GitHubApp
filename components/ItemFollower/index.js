@@ -9,12 +9,11 @@ export default function ItemFollower({nome, urlFollower, avatarFollower}) {
     const navigateTo = () => {navigation.navigate(navigationDestiny)}
 
     return (
-    //Conteiner em linha com 2 colunas.
     <View style={styles.container}>
-        <TouchableOpacity style={styles.touchable} onPress={navigateTo}>
+        <TouchableOpacity style={styles.touchable} onPress={()=>{}}>
             <View style={styles.icone}>
                 {/* <Icon name="person-outline" size={25} color={"#000038"}/> */}
-                <Image style={styles.image} source={(avatarFollower)} />
+                <Image style={styles.image} src={avatarFollower} />
             </View>
             <View style={styles.containerNome}>
                 <Text style={styles.nome}>{nome}</Text>
@@ -30,21 +29,29 @@ const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
         borderWidth:1,
-        height:"25%",        
+        borderRadius:10,
+        height:100,  
+        backgroundColor:"white",
+        margin:10,
     },
     touchable:{
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
+    image: {
+        width:"100%",
+        height:"100%",
+        borderRadius:10,
+    },
     icone:{
-        width:"15%" ,
+        width:"25%" ,
         height:"70%" ,
         justifyContent: 'center',
         alignItems: 'center',
         left:5,
-        borderWidth:2,
-        borderRadius:10,
+        // borderWidth:2,
+        // borderRadius:10,
         // backgroundColor: '#e80000',
 
     },
