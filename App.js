@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -12,22 +12,16 @@ import Repositorio from "./components/Repositorio";
 
 
 const Stack = createStackNavigator();
+//https://api.github.com/users/ronaldaraujo
 
-const DATA = [
-  { id: '1', icon: 'icon1', buttonText: 'Botão 1', description: 'Descrição 1', page: 'Page1' },
-  { id: '2', icon: 'icon2', buttonText: 'Botão 2', description: 'Descrição 2', page: 'Page2' },
-  { id: '3', icon: 'icon3', buttonText: 'Botão 3', description: 'Descrição 3', page: 'Page3' },
-  { id: '4', icon: 'icon4', buttonText: 'Botão 4', description: 'Descrição 4', page: 'Page4' },
-];
-
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   
     return (
-    <View style={styles.container}>
+    <SafeAreaView  style={styles.container}>
         <View style={styles.squareContainer}>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={require('./assets/favicon.png')} />
-                <TouchableOpacity style={styles.searchButton}>
+                <TouchableOpacity style={styles.searchButton} onPress={()=>{} }>
                     <Icon name="magnifying-glass" color='white' size={25}/>
                 </TouchableOpacity>
             </View>
@@ -56,12 +50,14 @@ const HomeScreen = ({ navigation }) => {
             </View>
         </View>
 
-        <TouchableOpacity style={styles.botaoReset} onPress={() => {}}>
-            <IconExit name="exit-outline" color='#000038' size={25}/>
-            <Text style={styles.textReset}>Resetar</Text>
+        <TouchableOpacity style={styles.botaoResetContainer} onPress={() => {}}>
+            <View style={styles.botaoReset}>
+                <IconExit name="exit-outline" color='#000038' size={25}/>
+                <Text style={styles.textReset}>Resetar</Text>
+            </View>
         </TouchableOpacity>
 
-    </View>
+    </SafeAreaView >
   );
 };
 
@@ -69,7 +65,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Tela de Pesquisa" component={HomeScreen} />
         <Stack.Screen name="Bio"  component={Bio} />
         <Stack.Screen name="Orgs" component={Orgs} />
         <Stack.Screen name="Repositorio" component={Repositorio} />
@@ -82,8 +78,9 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f6f9fd',
     padding: 20,
+    width: '100%',
   },
   squareContainer: {
     alignItems: 'center',
@@ -135,14 +132,31 @@ const styles = StyleSheet.create({
     borderBottomColor:"black",
     justifyContent: 'center', //space-evenly
   },
+  botaoResetContainer:{
+    flex:0.5,
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding:10,
+    // borderColor:"#000038",
+    // borderWidth:2,
+    borderRadius:10,
+    backgroundColor:"white",
+    justifyContent: 'center',
+    alignItems:"center",
+  },
   botaoReset:{
-    flex:1/2,
+    // flex:1/2,
+    width:"90%",
+    height:"90%",
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomColor:"black",
+    borderColor:"#000038",
     borderWidth:2,
     borderRadius:10,
+    backgroundColor:"white",
+
   },
   textReset:{
     left:8,

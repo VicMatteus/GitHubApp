@@ -4,36 +4,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 
 //Função do botão em linha que lida com os cliques
-export default function Botao({label, description, navigationDestiny}) {
+export default function ItemFollower({nome, idFollower}) {
     const navigation = useNavigation();
     const navigateTo = () => {navigation.navigate(navigationDestiny)}
-    
-    
-    //Tratar ícones baseado no lable.
-    let iconName = ""
-    let estilo = [styles.container]
-    switch(label) {
-        case 'Bio':
-          iconName = "person-outline"
-          estilo.push(styles.top)
-        break;
-        case 'Orgs':
-          iconName = "headset-outline"
-        break;
-        case 'Repositório':
-          iconName = "document-text-outline"
-        break;
-        case 'Seguidores':
-          iconName = "happy-outline"
-          estilo.push(styles.bottom)
-        break;
-        default:
-          iconName = "alert-outline"
-      }
 
     return (
-    //Conteiner em linha com 3 colunas.
-    <View style={[estilo]}>
+    //Conteiner em linha com 2 colunas.
+    <View style={styles.container}>
         <TouchableOpacity style={styles.touchable} onPress={navigateTo}>
             <View style={styles.icone}>
                 <Icon name={iconName} size={25} color={"#000038"}/>
@@ -53,19 +30,9 @@ export default function Botao({label, description, navigationDestiny}) {
 const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
-        backgroundColor:"white",
-        borderColor:"#edf2f8",
+
         borderWidth:1,
         height:"25%",        
-    },
-    top:{
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
-    },
-    bottom:{
-        borderBottomLeftRadius:10,
-        borderBottomRightRadius:10,
-        
     },
     touchable:{
         flexDirection: 'row',
