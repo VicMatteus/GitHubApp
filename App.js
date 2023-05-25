@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, Image, TextInput, KeyboardAvoidingView, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -21,12 +21,8 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView  style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'padding'}
-          style={styles.container}>
-        <TextInput style={styles.textInput} placeholder='Digite o usuário'></TextInput>
-        </KeyboardAvoidingView>
-
+        {/* o teclado do input está quebrando tudo */}
+        {inputState ? <TextInput style={styles.textInput} placeholder='Digite o usuário'></TextInput> : <></>}
         <View style={styles.squareContainer}>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={require('./assets/favicon.png')} />
