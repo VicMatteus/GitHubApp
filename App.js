@@ -4,7 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Entypo';
 import IconExit from 'react-native-vector-icons/Ionicons.js';
-import Botao from "./components/Botao/index.js";
+import Botao from "./components/Botao";
+import Bio from "./components/Bio";
+import Orgs from "./components/Orgs";
+import Seguidores from "./components/Seguidores";
+import Repositorio from "./components/Repositorio";
+
 
 const Stack = createStackNavigator();
 
@@ -31,54 +36,44 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.botoes}>
-            <Botao label="Bio" description="Um pouco sobre o usuário"/>
-            <Botao label="Orgs" description="Organizações que o usuário faz parte"/>
-            <Botao label="Repositório" description="Lista contendo todos os repositórios"/>
-            <Botao label="Seguidores" description="Lista de seguidores"/>
+            <View style={styles.bordaBotoes}>
+                <Botao label="Bio"  
+                    description="Um pouco sobre o usuário" 
+                    navigationDestiny={"Bio"}
+                />
+                <Botao label="Orgs" 
+                    description="Organizações que o usuário faz parte" 
+                    navigationDestiny={"Orgs"}
+                />
+                <Botao label="Repositório" 
+                    description="Lista contendo todos os repositórios" 
+                    navigationDestiny={"Repositorio"}
+                />
+                <Botao label="Seguidores" 
+                    description="Lista de seguidores" 
+                    navigationDestiny={"Seguidores"}
+                />
+            </View>
         </View>
 
         <TouchableOpacity style={styles.botaoReset} onPress={() => {}}>
             <IconExit name="exit-outline" color='#000038' size={25}/>
-            <Text style={styles.name}>Resetar</Text>
+            <Text style={styles.textReset}>Resetar</Text>
         </TouchableOpacity>
 
     </View>
   );
 };
 
-const Page1Screen = () => (
-  <View style={styles.pageContainer}>
-    <Text style={styles.pageText}>Página 1</Text>
-  </View>
-);
-
-const Page2Screen = () => (
-  <View style={styles.pageContainer}>
-    <Text style={styles.pageText}>Página 2</Text>
-  </View>
-);
-
-const Page3Screen = () => (
-  <View style={styles.pageContainer}>
-    <Text style={styles.pageText}>Página 3</Text>
-  </View>
-);
-
-const Page4Screen = () => (
-  <View style={styles.pageContainer}>
-    <Text style={styles.pageText}>Página 4</Text>
-  </View>
-);
-
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Page1" component={Page1Screen} />
-        <Stack.Screen name="Page2" component={Page2Screen} />
-        <Stack.Screen name="Page3" component={Page3Screen} />
-        <Stack.Screen name="Page4" component={Page4Screen} />
+        <Stack.Screen name="Bio"  component={Bio} />
+        <Stack.Screen name="Orgs" component={Orgs} />
+        <Stack.Screen name="Repositorio" component={Repositorio} />
+        <Stack.Screen name="Seguidores"  component={Seguidores} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -131,15 +126,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   botoes: {
+
     flex: 3,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center', //space-evenly
+  },
+  bordaBotoes:{
+    height: '80%',
+    borderBottomColor:"black",
+    justifyContent: 'center', //space-evenly
   },
   botaoReset:{
     flex:1/2,
     flexDirection: 'row',
-    backgroundColor:"brown",
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
+    borderBottomColor:"black",
+    borderWidth:2,
+    borderRadius:10,
+  },
+  textReset:{
+    left:8,
+    fontSize:20,
   },
   pageContainer: {
     flex: 1,

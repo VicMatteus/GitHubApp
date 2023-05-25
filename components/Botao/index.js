@@ -1,15 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 
 //Função do botão em linha que lida com os cliques
-export default function Botao({label, description}) {
-    let iconName = ""
-
+export default function Botao({label, description, navigationDestiny}) {
+    const navigation = useNavigation();
+    const navigateTo = () => {navigation.navigate(navigationDestiny)}
+    
+    
     //Tratar ícones baseado no lable.
+    let iconName = ""
+    let estilo = [styles.container]
     switch(label) {
         case 'Bio':
           iconName = "person-outline"
+          estilo.push(styles.top)
         break;
         case 'Orgs':
           iconName = "headset-outline"
@@ -19,6 +25,7 @@ export default function Botao({label, description}) {
         break;
         case 'Seguidores':
           iconName = "happy-outline"
+          estilo.push(styles.bottom)
         break;
         default:
           iconName = "alert-outline"
@@ -26,8 +33,8 @@ export default function Botao({label, description}) {
 
     return (
     //Conteiner em linha com 3 colunas.
-    <View style={styles.container}>
-        <TouchableOpacity style={styles.touchable}>
+    <View style={[estilo]}>
+        <TouchableOpacity style={styles.touchable} onPress={navigateTo}>
             <View style={styles.icone}>
                 <Icon name={iconName} size={25} color={"#000038"}/>
             </View>
@@ -46,23 +53,40 @@ export default function Botao({label, description}) {
 const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
-        borderBottomColor:"black",
-        borderWidth:2,
-        borderRadius:10,
-        height:"20%",        
+
+        borderWidth:1,
+        height:"25%",        
+    },
+    top:{
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+    },
+    bottom:{
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10,
+        
     },
     touchable:{
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     icone:{
         width:"15%" ,
+        height:"70%" ,
         justifyContent: 'center',
         alignItems: 'center',
+        left:5,
+        borderWidth:2,
+        borderRadius:10,
+        // backgroundColor: '#e80000',
+
     },
     containerNome:{
         flexDirection: 'column',
         width: "70%",
         height:"100%",
+        left: 12,
         justifyContent: 'center',
     },
     nome:{
