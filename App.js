@@ -23,11 +23,15 @@ const HomeScreen = () => {
     //Às vezes, esse cara não carrega... Pq? Tbm não posso colocar ele em um useEffect...
     // const {usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca} = useContext(UserContext);
     // const {mudarIDbusca} = useContext(UserContext);
-    const usuarioAtual = useContext(UserContext);
+    // const [usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca] = useContext(UserContext);
+    const [usuarioAtual, mudarIDbusca] = useContext(UserContext);
+    // const [usuarioAtual] = useContext(UserContext);
 
     function resetarEstados() {
-        setIdBusca("/vicmatteus")
+        mudarIDbusca("/vicmatteus")
         console.log("resentando usuario")
+        // console.log(usuarioAtual)
+        // console.log(idBusca)
     }
 
     useEffect(() => {
@@ -46,7 +50,7 @@ const HomeScreen = () => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {/* o teclado do input está quebrando tudo */}
             {inputState ? <TextInput style={styles.textInput} placeholder='Digite o usuário'></TextInput> : <></>}
             <View style={styles.squareContainer}>
@@ -90,7 +94,7 @@ const HomeScreen = () => {
                 </View>
             </TouchableOpacity>
 
-        </SafeAreaView >
+        </View >
     );
 };
 
@@ -99,8 +103,7 @@ const App = () => {
     const [usuarioAtual, setUsuarioAtual] = useState()
     const [idBusca, setIdBusca] = useState("/ronaldaraujo")
 
-    const mudarUsuario = (usuario) => setUsuarioAtual(usuario);
-    const mudarIDbusca = (id) => setIdBusca(id);
+    function mudarIDbusca(id){setIdBusca(id)};
 
     useEffect(() => {
         fetch(urlBase + idBusca)
