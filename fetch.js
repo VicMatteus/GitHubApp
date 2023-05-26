@@ -12,4 +12,14 @@
 
 fetch('https://api.github.com/users/ronaldaraujo/repos')
 .then((response) => response.json())
-.then((data) => console.log(data[0]))
+.then((data) => {
+    data.map((repositorio)=>{
+        let data = new Date(repositorio.created_at)
+        console.log(repositorio.name)
+        console.log(repositorio.private)
+        console.log(repositorio.html_url)
+        console.log(repositorio.description)
+        console.log(data.getDay()+"/"+data.getMonth()+"/"+data.getFullYear())
+        console.log(repositorio.git_url)
+    })
+})
