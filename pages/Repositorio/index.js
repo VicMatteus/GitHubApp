@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { View, Text, Alert, StyleSheet, ScrollView } from 'react-native';
 import UserContext from '../../context/UserContext/UserContext';
-import ItemRepositorio from '../ItemRepositorio';
+import ItemRepositorio from '../../components/ItemRepositorio';
 
 export default function Repositorio() {
     const [usuarioAtual, setUsuarioAtual] = useContext(UserContext);

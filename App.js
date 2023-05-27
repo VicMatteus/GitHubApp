@@ -1,121 +1,24 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { Text, Image, TextInput, TouchableOpacity, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Entypo';
-import IconExit from 'react-native-vector-icons/Ionicons.js';
-import Botao from "./components/Botao";
-import Bio from "./components/Bio";
-import Orgs from "./components/Orgs";
-import Seguidores from "./components/Seguidores";
-import Repositorio from "./components/Repositorio";
+import Bio from "./pages/Bio";
+import Orgs from "./pages/Orgs";
+import Seguidores from "./pages/Seguidores";
+import Repositorio from "./pages/Repositorio";
 import UserContext from './context/UserContext/UserContext';
+import HomeScreen from './pages/HomeScreen';
 
 const Stack = createStackNavigator();
 //https://api.github.com/users/ronaldaraujo
 
-const HomeScreen = () => {
-    const [inputState, toogleInput] = useState(false);
-    const [userAtual, setUserAtual] = useState();
-    const alternarInput = () => toogleInput(!inputState)
-
-    //Às vezes, esse cara não carrega... Pq? Tbm não posso colocar ele em um useEffect...
-    // const {usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca} = useContext(UserContext);
-    // const {mudarIDbusca} = useContext(UserContext);
-    // const [usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca] = useContext(UserContext);
-    const [usuarioAtual, mudarIDbusca] = useContext(UserContext);
-    // const [usuarioAtual] = useContext(UserContext);
-
-    function resetarEstados() {
-        mudarIDbusca("/vicmatteus")
-        console.log("resentando usuario")
-        // console.log(usuarioAtual)
-        // console.log(idBusca)
-    }
-
-    useEffect(() => {
-        let urlBase = "https://api.github.com/users"
-        fetch(urlBase+"/"+usuarioAtual.login)
-            .then((response) => response.json())
-            .then((data) => {
-                setUserAtual(data)
-                console.log(data)
-            })
-            .catch((error) => {
-                console.log(error)
-                Alert.alert("Erro ao buscar usuário.")
-            });
-    }, [])
-
-
-    return (
-        <View style={styles.container}>
-            {/* o teclado do input está quebrando tudo */}
-            {inputState ? <TextInput style={styles.textInput} placeholder='Digite o usuário'></TextInput> : <></>}
-            <View style={styles.squareContainer}>
-                <View style={styles.imageContainer}>
-
-                    {/* source={{uri: usuarioAtual.avatar_url,}} */}
-                    <Image style={styles.image} src={usuarioAtual.avatar_url} />
-                    <TouchableOpacity style={styles.searchButton} onPress={() => { alternarInput() }}>
-                        <Icon name="magnifying-glass" color='white' size={25} />
-                    </TouchableOpacity>
-                </View>
-                <Text style={styles.name}>{usuarioAtual.name}</Text>
-                <Text style={styles.subname}>@{usuarioAtual.login}</Text>
-            </View>
-
-            <View style={styles.botoes}>
-                <View style={styles.bordaBotoes}>
-                    <Botao label="Bio"
-                        description="Um pouco sobre o usuário"
-                        navigationDestiny={"Bio"}
-                    />
-                    <Botao label="Orgs"
-                        description="Organizações que o usuário faz parte"
-                        navigationDestiny={"Orgs"}
-                    />
-                    <Botao label="Repositório"
-                        description="Lista contendo todos os repositórios"
-                        navigationDestiny={"Repositorio"}
-                    />
-                    <Botao label="Seguidores"
-                        description="Lista de seguidores"
-                        navigationDestiny={"Seguidores"}
-                    />
-                </View>
-            </View>
-
-            <TouchableOpacity style={styles.botaoResetContainer} onPress={resetarEstados}>
-                <View style={styles.botaoReset}>
-                    <IconExit name="exit-outline" color='#000038' size={25} />
-                    <Text style={styles.textReset}>Resetar</Text>
-                </View>
-            </TouchableOpacity>
-
-        </View >
-    );
-};
-
 const App = () => {
-    const urlBase = "https://api.github.com/users"
-    const [usuarioAtual, setUsuarioAtual] = useState()
+    // const urlBase = "https://api.github.com/users"
+    const [usuarioAtual, setUsuarioAtual] = useState([])
     const [idBusca, setIdBusca] = useState("/ronaldaraujo")
 
     function mudarIDbusca(id){setIdBusca(id)};
-
-    useEffect(() => {
-        fetch(urlBase + idBusca)
-            .then(response => response.json())
-            .then(data => {
-                setUsuarioAtual(data)
-                console.log(data)
-            })
-            .catch(error => {
-                console.log("Erro na consulta.")
-            });
-    }, [idBusca]);
 
     return (
         <UserContext.Provider value={[usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca]}>

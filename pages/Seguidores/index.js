@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { useState, useEffect, useContext } from 'react'
-import ItemFollower from '../ItemFollower';
+import ItemFollower from '../../components/ItemFollower';
 import UserContext from '../../context/UserContext/UserContext';
 
 export default function Seguidores() {
