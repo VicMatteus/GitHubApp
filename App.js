@@ -9,14 +9,14 @@ import Seguidores from "./pages/Seguidores";
 import Repositorio from "./pages/Repositorio";
 import UserContext from './context/UserContext/UserContext';
 import HomeScreen from './pages/HomeScreen';
+import PaginaDePesquisa from './pages/PaginaDePesquisa';
 
 const Stack = createStackNavigator();
 //https://api.github.com/users/ronaldaraujo
 
 const App = () => {
-    // const urlBase = "https://api.github.com/users"
     const [usuarioAtual, setUsuarioAtual] = useState([])
-    const [idBusca, setIdBusca] = useState("/ronaldaraujo")
+    const [idBusca, setIdBusca] = useState("ronaldaraujo")
 
     function mudarIDbusca(id){setIdBusca(id)};
 
@@ -24,7 +24,8 @@ const App = () => {
         <UserContext.Provider value={[usuarioAtual, setUsuarioAtual, idBusca, mudarIDbusca]}>
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Tela de Pesquisa" component={HomeScreen} />
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Tela de Pesquisa" component={PaginaDePesquisa} />
                     <Stack.Screen name="Bio" component={Bio} />
                     <Stack.Screen name="Orgs" component={Orgs} />
                     <Stack.Screen name="Repositorio" component={Repositorio} />

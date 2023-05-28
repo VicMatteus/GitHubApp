@@ -1,16 +1,39 @@
 import React from 'react';
+import UserContext from '../../context/UserContext/UserContext';
+import { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 
 //Função do botão em linha que lida com os cliques
-export default function ItemFollower({nome, urlFollower, avatarFollower}) {
+export default function ItemFollower({nome, urlFollower, avatarFollower, navigationDestiny}) {
+    const [usuarioAtual, setUsuarioAtual, mudarIDbusca] = useContext(UserContext)
     const navigation = useNavigation();
-    const navigateTo = () => {navigation.navigate(navigationDestiny)}
+
+    //Funciona, mas eu queria que tivesse funcionado só ao alterar o IDBUSCA e o useEffect da home cuidasse do resto
+    const navigateTo = () => {
+        console.log(nome)
+        // mudarIDbusca("vicmatteus")
+        fetch(urlFollower)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data.message === "Not Found") {
+                    console.log("usuario nao encontrado.")
+                    return
+                }
+                console.log("encontrou usuario")
+                setUsuarioAtual(data)
+            })
+            .catch((error) => {
+                Alert.alert("Atenção", "Não foi possível encontrar o usuário informado.");
+            });
+        navigation.navigate("Home")
+    }
 
     return (
     <View style={styles.container}>
-        <TouchableOpacity style={styles.touchable} onPress={()=>{}}>
+        <TouchableOpacity style={styles.touchable} onPress={()=>navigateTo()}>
             <View style={styles.icone}>
                 {/* <Icon name="person-outline" size={25} color={"#000038"}/> */}
                 <Image style={styles.image} src={avatarFollower} />

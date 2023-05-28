@@ -15,10 +15,8 @@ export default function Seguidores() {
         fetch(usuarioAtual.followers_url)
             .then((response) => response.json())
             .then((data) => {
-                // setListFollowers(data)
                 if (data.length > 0) {
                     setListFollowers(data)
-                    // console.log(listFollowers)
                 }
             })
             .catch((error) => {
