@@ -12,6 +12,6 @@ Conta com 4 telas:
 - Seguidores
   - Apresenta uma lista dos seguidores do usuário com nome, foto de perfil e url.
   - Ao clicar em um seguidor, podemos ver seu perfil.
-  - 
+Foi feito usando React Native e a biblioteca de navegação React Navigator.
 Cada tela conta com informações consumidas da API do GitHub.
 Projeto feito para disciplina de computação móvel 2023.1 da Universidade Federal do Ceará. 
