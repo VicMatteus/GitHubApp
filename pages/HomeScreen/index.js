@@ -73,9 +73,7 @@ export default HomeScreen = () => {
             
             <View style={styles.squareContainer}>
                 <View style={styles.imageContainer}>
-
                     <Image style={styles.image} src={usuarioAtual.avatar_url} />
-                    {/* <TouchableOpacity style={styles.searchButton} onPress={() => { navigation.navigate("Tela de Pesquisa") }}> */}
                     <TouchableOpacity style={styles.searchButton} onPress={() => { alternarInput() }}>
                         <Icon name="magnifying-glass" color='white' size={25} />
                     </TouchableOpacity>
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 700,
     },
-
     squareContainer: {
         alignItems: 'center',
         marginTop: '5%',
@@ -156,8 +153,6 @@ const styles = StyleSheet.create({
         width: '40%',
         height: '60%',
         borderRadius: 50,
-        // borderWidth: 2,
-        // borderColor: 'black',  // Adicionar borda preta
         justifyContent: 'center', // Centralizar verticalmente
         alignItems: 'center',     // Centralizar horizontalmente
     },
@@ -174,7 +169,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
     },
-
     name: {
         color: 'black',
         fontWeight: 'bold',
@@ -190,28 +184,24 @@ const styles = StyleSheet.create({
     botoes: {
 
         flex: 3,
-        justifyContent: 'center', //space-evenly
+        justifyContent: 'center', 
     },
     bordaBotoes: {
         height: '80%',
         borderBottomColor: "black",
-        justifyContent: 'center', //space-evenly
+        justifyContent: 'center', 
     },
     botaoResetContainer: {
         flex: 0.5,
-        // flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
-        // borderColor:"#000038",
-        // borderWidth:2,
         borderRadius: 10,
         backgroundColor: "white",
         justifyContent: 'center',
         alignItems: "center",
     },
     botaoReset: {
-        // flex:1/2,
         width: "90%",
         height: "90%",
         flexDirection: 'row',
@@ -221,7 +211,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
         backgroundColor: "white",
-
     },
     textReset: {
         left: 8,

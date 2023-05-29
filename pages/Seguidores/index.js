@@ -6,7 +6,6 @@ import UserContext from '../../context/UserContext/UserContext';
 
 export default function Seguidores() {
 
-    let listaUsers = <Text>Não existem seguidores.</Text>
     const [usuarioAtual] = useContext(UserContext);
     const [listFollowers, setListFollowers] = useState([])
 

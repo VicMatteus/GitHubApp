@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
           width: 2,
           height: 9,
         }
-        
     },
     numeros:{
         height: "30%",
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
         color: '#515151',
 
     },
-    //
     containerBio: {
         height: "25%",
         justifyContent: 'center',

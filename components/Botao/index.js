@@ -8,8 +8,7 @@ export default function Botao({label, description, navigationDestiny}) {
     const navigation = useNavigation();
     const navigateTo = () => {navigation.navigate(navigationDestiny)}
     
-    
-    //Tratar ícones baseado no lable.
+    //Tratar ícones baseado no label.
     let iconName = ""
     let estilo = [styles.container]
     switch(label) {
@@ -81,8 +80,6 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:10,
         borderColor: '#edf2f8'
-        // backgroundColor: '#e80000',
-
     },
     containerNome:{
         flexDirection: 'column',

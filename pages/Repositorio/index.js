@@ -13,7 +13,6 @@ export default function Repositorio() {
             .then((response) => response.json())
             .then((data) => {
                 setRepository(data)
-                // console.log(data[0].created_at)
             })
             .catch((error) => {
                 console.log(error)

@@ -1,6 +1,7 @@
 import { View, KeyboardAvoidingView, TouchableWithoutFeedback, StyleSheet, TextInput, Keyboard } from 'react-native'
 import React from 'react'
 
+// @Deprecated
 const PaginaDePesquisa = () => {
     return (
         <KeyboardAvoidingView
