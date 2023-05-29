@@ -3,7 +3,7 @@ Aplicação de visualização de dados do git. Feita como prática de react nati
 O App funciona como um visualizador de perfis do GitHub.
 Conta com 4 telas:
 - Home 
-  - Apresenta foto, nome do usuário e nome da pessoa.
+  - Apresenta foto, nome do usuário e nome da pessoa. Além de 4 botões que levam às outras telas.
 - Bio
   - apresenta informações sobre o usuário
 - Organizações
